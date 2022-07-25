@@ -7,17 +7,14 @@ import 'package:elbrit_central/views/home.dart';
 
 import 'package:elbrit_central/views/log_in_otp.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
+import '../services/global_data.dart';
 import '../view_model/employee_data_view_model.dart';
+import 'package:elbrit_central/main.dart';
 
 class LogInPage extends StatefulWidget {
   LogInPage({Key? key}) : super(key: key);
@@ -190,9 +187,11 @@ class _LogInPageState extends State<LogInPage> {
                                 print(">>>>>>>>>>>>>>ok got it<<<<<<<<<<<<<<<<<<<");
 
                                 if (employeeModel != null) {
-                                  final provider=Provider.of<VerifiedEmployeeDataViewModel>(context,listen: false);
-                                  provider.setTeamId(int.parse(employeeModel.team!.id.toString()));
-                                  print(provider.teamId);
+                                  //final provider=Provider.of<VerifiedEmployeeDataViewModel>(context,listen: false);
+                                  //provider.setTeamId(int.parse(employeeModel.team!.id.toString()));
+                                  //print(provider.teamId);
+                                  datosusuario=employeeModel.team!.id;
+                                  //GlobalData().setId(employeeModel.team!.id);
                                   print(employeeModel.team!.id);
                                   print(">>>>>>>>>>>>>>ok got it<<<<<<<<<<<<<<<<<<<");
 

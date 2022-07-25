@@ -82,7 +82,7 @@ class _ProductPageState extends State<ProductPage> {
                       return GestureDetector(
                         child: ProductTile(
                           picture:
-                              "https://elbrit.devcorn.live/uploads/carton/${productModels[index].cartonImage!}",
+                              "http://admin.elbrit.org/api/uploads/carton/${productModels[index].cartonImage!}",
                           title: productModels[index].productName!,
                           brandPromo: productModels[index].others!,
                           medicineName: productModels[index].labelClaim!,

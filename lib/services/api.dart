@@ -7,6 +7,8 @@ import 'package:elbrit_central/models/wall_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 
+import '../main.dart';
+
 class Api {
   Future<EmployeeModel?> getEmployeeData({required String mobileNo}) async {
     var client = http.Client();
@@ -31,8 +33,15 @@ class Api {
 
   Future<List<WallModel>> getWallData() async {
     var client = http.Client();
-    var uri = Uri.parse('https://elbrit.devcorn.live/api/walls');
-    var response = await client.get(uri);
+    var uri = Uri.parse('http://admin.elbrit.org/api/walls/${datosusuario}');
+    //var response = await client.get(uri);
+    bool trustSelfSigned = true;
+    HttpClient httpClient = HttpClient()
+      ..badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => trustSelfSigned);
+    IOClient ioClient = IOClient(httpClient);
+    //var response = await client.get(uri);
+    var response = await ioClient.get(uri);
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       print(json["data"].toString());
@@ -44,10 +53,11 @@ class Api {
     }
   }
 
-  Future<List<Data>> getPriceData(String teamId) async {
+  Future<List<Data>> getPriceData() async {
     var client = http.Client();
+    print(datosusuario);
     //var uri = Uri.parse('https://admin.elbrit.org/api/prices');
-    var uri = Uri.parse('http://admin.elbrit.org/api/prices/${teamId}');
+    var uri = Uri.parse('http://admin.elbrit.org/api/prices/${datosusuario}');
     bool trustSelfSigned = true;
     HttpClient httpClient = HttpClient()
       ..badCertificateCallback =
@@ -89,8 +99,15 @@ class Api {
 
   Future<List<ProductModel>> getProducts() async {
     var client = http.Client();
-    var uri = Uri.parse('https://elbrit.devcorn.live/api/products');
-    var response = await client.get(uri);
+    var uri = Uri.parse('http://admin.elbrit.org/api/products/${datosusuario}');
+  bool trustSelfSigned = true;
+  HttpClient httpClient = HttpClient()
+    ..badCertificateCallback =
+    ((X509Certificate cert, String host, int port) => trustSelfSigned);
+  IOClient ioClient = IOClient(httpClient);
+
+  //var response = await client.get(uri);
+  var response = await ioClient.get(uri);
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       print(json["data"].toString());

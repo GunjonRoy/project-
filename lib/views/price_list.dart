@@ -7,7 +7,6 @@ import 'package:elbrit_central/services/api.dart';
 import 'package:elbrit_central/views/profile.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../view_model/employee_data_view_model.dart';
@@ -23,25 +22,26 @@ class _PriceListPageState extends State<PriceListPage> {
   //List<Data> priceModels = [];
   List<Data> priceList = [];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getPriceInfo();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    getPriceInfo();
+  }
 
   Future<void> getPriceInfo() async {
-    final provider=Provider.of<VerifiedEmployeeDataViewModel>(context,listen: false);
+    //final provider=Provider.of<VerifiedEmployeeDataViewModel>(context,listen: false);
     //priceModels = await Api().getPriceData();
-    print(provider.teamId.toString());
-    final list = await Api().getPriceData(provider.teamId.toString());
+    //print(provider.teamId.toString());
+    final list = await Api().getPriceData();//provider.teamId.toString());
     //priceList=list;
     print('productModels: ${priceList.length}');
     setState(() {priceList=list;});
+    //provider.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    getPriceInfo();
+    //getPriceInfo();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
